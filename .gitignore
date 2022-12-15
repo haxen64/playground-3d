@@ -1,0 +1,10 @@
+# Output
+bin/
+obj/
+
+# VS cache
+.vs/
+
+# User preferences
+*.vcxproj.filters
+*.vcxproj.user
