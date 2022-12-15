@@ -6,4 +6,10 @@
 #define VulkanRendererExport __declspec(dllimport)
 #endif
 
-extern "C" VulkanRendererExport int test();
+namespace vulkan_renderer
+{
+    extern "C"
+    {
+        VulkanRendererExport void test();
+    }
+}

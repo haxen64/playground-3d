@@ -1,6 +1,11 @@
 #include "Test.h"
 
-int test()
+#include "contexts/VulkanInstanceContext.h"
+
+namespace vulkan_renderer
 {
-    return 42;
+    void test()
+    {
+        contexts::VulkanInstanceContext vulkanInstanceContext;
+    }
 }
