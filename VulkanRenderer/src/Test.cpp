@@ -1,11 +1,14 @@
 #include "Test.h"
 
-#include "contexts/VulkanInstanceContext.h"
+#include <iostream>
+#include "core/Instance.h"
 
 namespace vulkan_renderer
 {
     void test()
     {
-        contexts::VulkanInstanceContext vulkanInstanceContext;
+        core::Instance instance;
+        core::PhysicalDevice gpu = instance.getPhysicalDevice(core::PhysicalDeviceType::DiscreteGpu);
+        std::cout << gpu.getName() << std::endl;
     }
 }

@@ -16,9 +16,10 @@ namespace vulkan_renderer::utils
                            std::function<void()> releaseFunction);
         ~ProcedureRetriever();
 
-        ProcedureRetriever(const ProcedureRetriever& procedureRetriever) = delete;
+        ProcedureRetriever(const ProcedureRetriever&) = delete;
         ProcedureRetriever(ProcedureRetriever&& procedureRetriever) noexcept;
-        ProcedureRetriever& operator=(ProcedureRetriever procedureRetriever);
+        ProcedureRetriever& operator=(const ProcedureRetriever&) = delete;
+        ProcedureRetriever& operator=(ProcedureRetriever&& procedureRetriever) noexcept;
 
         void* getProcAddress(const std::string& procName) const;
 

@@ -35,7 +35,7 @@ namespace vulkan_renderer::utils
         std::swap(_releaseFunction, procedureRetriever._releaseFunction);
     }
 
-    ProcedureRetriever& ProcedureRetriever::operator=(ProcedureRetriever procedureRetriever)
+    ProcedureRetriever& ProcedureRetriever::operator=(ProcedureRetriever&& procedureRetriever) noexcept
     {
         std::swap(_getProcAddrFunction, procedureRetriever._getProcAddrFunction);
         std::swap(_releaseFunction, procedureRetriever._releaseFunction);

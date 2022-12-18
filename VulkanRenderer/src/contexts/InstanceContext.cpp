@@ -1,11 +1,10 @@
-#include "contexts/VulkanInstanceContext.h"
+#include "contexts/InstanceContext.h"
 
 #include <stdexcept>
-#include <vulkan/vulkan.h>
 
 namespace vulkan_renderer::contexts
 {
-	VulkanInstanceContext::VulkanInstanceContext()
+    InstanceContext::InstanceContext()
         : _vkProcedureRetriever(utils::ProcedureRetriever::LoadWindowsLibrary("vulkan-1.dll"))
     {
         PFN_vkGetInstanceProcAddr vkGetInstanceProcAddr = (PFN_vkGetInstanceProcAddr)_vkProcedureRetriever.getProcAddress("vkGetInstanceProcAddr");
@@ -21,24 +20,27 @@ namespace vulkan_renderer::contexts
         createInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
         createInfo.pApplicationInfo = &appInfo;
 
-        if (vkCreateInstance(&createInfo, nullptr, &_vkInstance) != VK_SUCCESS)
+        if (vkCreateInstance(&createInfo, nullptr, &_handle) != VK_SUCCESS)
             throw std::runtime_error("Failed to create a vulkan instance.");
 
         _vkInstanceProcedureRetriever = utils::ProcedureRetriever(
-            [=](const std::string& procName) { return vkGetInstanceProcAddr(_vkInstance, procName.c_str()); },
-            [=]() { ((PFN_vkDestroyInstance)vkGetInstanceProcAddr(_vkInstance, "vkDestroyInstance"))(_vkInstance, nullptr); }
+            [=](const std::string& procName) { return vkGetInstanceProcAddr(_handle, procName.c_str()); },
+            [=]() { ((PFN_vkDestroyInstance)vkGetInstanceProcAddr(_handle, "vkDestroyInstance"))(_handle, nullptr); }
         );
 
         loadFunctions();
     }
 
-    VkResult VulkanInstanceContext::enumeratePhysicalDevices(uint32_t* pPhysicalDeviceCount, VkPhysicalDevice* pPhysicalDevices)
+    VkResult InstanceContext::enumeratePhysicalDevices(uint32_t* pPhysicalDeviceCount, VkPhysicalDevice* pPhysicalDevices) const
     {
-        return _vkEnumeratePhysicalDevices(_vkInstance, pPhysicalDeviceCount, pPhysicalDevices);
+        return _vkEnumeratePhysicalDevices(_handle, pPhysicalDeviceCount, pPhysicalDevices);
     }
 
-	void VulkanInstanceContext::loadFunctions()
-	{
+    void InstanceContext::loadFunctions()
+    {
+        getPhysicalDeviceFeatures = (PFN_vkGetPhysicalDeviceFeatures)_vkInstanceProcedureRetriever.getProcAddress("vkGetPhysicalDeviceFeatures");
+        getPhysicalDeviceProperties = (PFN_vkGetPhysicalDeviceProperties)_vkInstanceProcedureRetriever.getProcAddress("vkGetPhysicalDeviceProperties");
+
         _vkEnumeratePhysicalDevices = (PFN_vkEnumeratePhysicalDevices)_vkInstanceProcedureRetriever.getProcAddress("vkEnumeratePhysicalDevices");
-	}
+    }
 }
