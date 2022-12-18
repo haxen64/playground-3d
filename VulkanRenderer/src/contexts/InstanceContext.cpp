@@ -1,52 +1,40 @@
 #include "contexts/InstanceContext.h"
 
-#include <stdexcept>
-#include "helpers/Interoperability.h"
-
 namespace vulkan_renderer::contexts
 {
-    InstanceContext::InstanceContext()
+    InstanceContext::InstanceContext(VkInstance handle, PFN_vkGetInstanceProcAddr vkGetInstanceProcAddr)
+        : _handle(handle)
     {
-        _vulkanLibHandle = helpers::Interoperability::LoadWindowsLibrary("vulkan-1.dll");
+        _vkInstanceProcedureRetriever = common::utils::ProcedureRetriever([=](const char* procedureName) { return vkGetInstanceProcAddr(handle, procedureName); });
 
-        PFN_vkGetInstanceProcAddr vkGetInstanceProcAddr = (PFN_vkGetInstanceProcAddr)GetProcAddress(_vulkanLibHandle.value(), "vkGetInstanceProcAddr");
-        PFN_vkCreateInstance vkCreateInstance = (PFN_vkCreateInstance)vkGetInstanceProcAddr(nullptr, "vkCreateInstance");
-
-        VkApplicationInfo appInfo{};
-        appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
-        appInfo.pApplicationName = "Vulkan Renderer";
-        appInfo.applicationVersion = VK_MAKE_API_VERSION(0, 1, 0, 0);
-        appInfo.apiVersion = VK_API_VERSION_1_0;
-
-        VkInstanceCreateInfo createInfo{};
-        createInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
-        createInfo.pApplicationInfo = &appInfo;
-
-        VkInstance handle;
-
-        if (vkCreateInstance(&createInfo, nullptr, &handle) != VK_SUCCESS)
-            throw std::runtime_error("Failed to create a vulkan instance.");
-
-        _handle = common::utils::SmartWrapper<VkInstance>(
-            handle,
-            [=](VkInstance h) { ((PFN_vkDestroyInstance)vkGetInstanceProcAddr(h, "vkDestroyInstance"))(h, nullptr); });
-
-        _vkGetInstanceProcAddr = vkGetInstanceProcAddr;
-        loadFunctions();
-    }
-
-    void* InstanceContext::getInstanceProcAddr(const char* pName) const
-    {
-        return _vkGetInstanceProcAddr(_handle.value(), pName);
+        _vkEnumeratePhysicalDevices = (PFN_vkEnumeratePhysicalDevices)getInstanceProcAddr("vkEnumeratePhysicalDevices");
+        _vkGetPhysicalDeviceFeatures = (PFN_vkGetPhysicalDeviceFeatures)getInstanceProcAddr("vkGetPhysicalDeviceFeatures");
+        _vkGetPhysicalDeviceProperties = (PFN_vkGetPhysicalDeviceProperties)getInstanceProcAddr("vkGetPhysicalDeviceProperties");
+        _vkGetPhysicalDeviceQueueFamilyProperties = (PFN_vkGetPhysicalDeviceQueueFamilyProperties)getInstanceProcAddr("vkGetPhysicalDeviceQueueFamilyProperties");
     }
 
     VkResult InstanceContext::enumeratePhysicalDevices(uint32_t* pPhysicalDeviceCount, VkPhysicalDevice* pPhysicalDevices) const
     {
-        return _vkEnumeratePhysicalDevices(_handle.value(), pPhysicalDeviceCount, pPhysicalDevices);
+        return _vkEnumeratePhysicalDevices(_handle, pPhysicalDeviceCount, pPhysicalDevices);
     }
 
-    void InstanceContext::loadFunctions()
+    void* InstanceContext::getInstanceProcAddr(const char* pName) const
     {
-        _vkEnumeratePhysicalDevices = (PFN_vkEnumeratePhysicalDevices)getInstanceProcAddr("vkEnumeratePhysicalDevices");
+        return _vkInstanceProcedureRetriever.getProcedureAddress(pName);
+    }
+
+    void InstanceContext::getPhysicalDeviceFeatures(VkPhysicalDevice physicalDevice, VkPhysicalDeviceFeatures* pFeatures) const
+    {
+        _vkGetPhysicalDeviceFeatures(physicalDevice, pFeatures);
+    }
+
+    void InstanceContext::getPhysicalDeviceProperties(VkPhysicalDevice physicalDevice, VkPhysicalDeviceProperties* pProperties) const
+    {
+        _vkGetPhysicalDeviceProperties(physicalDevice, pProperties);
+    }
+
+    void InstanceContext::getPhysicalDeviceQueueFamilyProperties(VkPhysicalDevice physicalDevice, uint32_t* pQueueFamilyPropertyCount, VkQueueFamilyProperties* pQueueFamilyProperties) const
+    {
+        _vkGetPhysicalDeviceQueueFamilyProperties(physicalDevice, pQueueFamilyPropertyCount, pQueueFamilyProperties);
     }
 }

@@ -1,30 +1,29 @@
 #pragma once
 
 #include <vulkan/vulkan.h>
-#include <windows.h>
-
-#include <common/utils/SmartWrapper.h>
+#include <common/utils/ProcedureRetriever.h>
 
 namespace vulkan_renderer::contexts
 {
     class InstanceContext
     {
     public:
-        InstanceContext();
-
-        InstanceContext(const InstanceContext&) = delete;
-        InstanceContext& operator=(const InstanceContext&) = delete;
+        InstanceContext(VkInstance handle, PFN_vkGetInstanceProcAddr vkGetInstanceProcAddr);
 
         void* getInstanceProcAddr(const char* pName) const;
+
         VkResult enumeratePhysicalDevices(uint32_t* pPhysicalDeviceCount, VkPhysicalDevice* pPhysicalDevices) const;
+        void getPhysicalDeviceFeatures(VkPhysicalDevice physicalDevice, VkPhysicalDeviceFeatures* pFeatures) const;
+        void getPhysicalDeviceProperties(VkPhysicalDevice physicalDevice, VkPhysicalDeviceProperties* pProperties) const;
+        void getPhysicalDeviceQueueFamilyProperties(VkPhysicalDevice physicalDevice, uint32_t* pQueueFamilyPropertyCount, VkQueueFamilyProperties* pQueueFamilyProperties) const;
 
     private:
-        common::utils::SmartWrapper<HMODULE> _vulkanLibHandle;
-        common::utils::SmartWrapper<VkInstance> _handle;
+        VkInstance _handle;
+        common::utils::ProcedureRetriever _vkInstanceProcedureRetriever;
 
-        PFN_vkGetInstanceProcAddr _vkGetInstanceProcAddr;
         PFN_vkEnumeratePhysicalDevices _vkEnumeratePhysicalDevices;
-
-        void loadFunctions();
+        PFN_vkGetPhysicalDeviceFeatures _vkGetPhysicalDeviceFeatures;
+        PFN_vkGetPhysicalDeviceProperties _vkGetPhysicalDeviceProperties;
+        PFN_vkGetPhysicalDeviceQueueFamilyProperties _vkGetPhysicalDeviceQueueFamilyProperties;
     };
 }

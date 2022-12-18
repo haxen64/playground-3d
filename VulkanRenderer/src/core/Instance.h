@@ -1,6 +1,11 @@
 #pragma once
 
+#include <memory>
 #include <optional>
+#include <vulkan/vulkan.h>
+#include <windows.h>
+
+#include <common/utils/SmartWrapper.h>
 
 #include "contexts/InstanceContext.h"
 #include "core/PhysicalDevice.h"
@@ -16,6 +21,8 @@ namespace vulkan_renderer::core
         PhysicalDevice getPhysicalDevice(const std::optional<PhysicalDeviceType> preferredType = std::nullopt) const;
 
     private:
-        contexts::InstanceContext _context;
+        std::unique_ptr<contexts::InstanceContext> _context;
+        common::utils::SmartWrapper<HMODULE> _vulkanLibHandle;
+        common::utils::SmartWrapper<VkInstance> _handle;
     };
 }

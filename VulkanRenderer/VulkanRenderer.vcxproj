@@ -90,7 +90,6 @@
   <ItemGroup>
     <ClInclude Include="include\vulkan_renderer\Test.h" />
     <ClInclude Include="src\contexts\InstanceContext.h" />
-    <ClInclude Include="src\contexts\PhysicalDeviceContext.h" />
     <ClInclude Include="src\core\Instance.h" />
     <ClInclude Include="src\core\PhysicalDevice.h" />
     <ClInclude Include="src\core\PhysicalDeviceType.h" />
@@ -99,7 +98,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\contexts\InstanceContext.cpp" />
-    <ClCompile Include="src\contexts\PhysicalDeviceContext.cpp" />
     <ClCompile Include="src\core\Instance.cpp" />
     <ClCompile Include="src\core\PhysicalDevice.cpp" />
     <ClCompile Include="src\core\QueueFamilyProperties.cpp" />

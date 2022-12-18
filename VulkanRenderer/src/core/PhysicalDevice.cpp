@@ -2,11 +2,11 @@
 
 namespace vulkan_renderer::core
 {
-    PhysicalDevice::PhysicalDevice(const contexts::InstanceContext* instanceContext, VkPhysicalDevice handle)
-        : _context(contexts::PhysicalDeviceContext(instanceContext, handle))
+    PhysicalDevice::PhysicalDevice(const contexts::InstanceContext* context, VkPhysicalDevice handle)
+        : _context(context), _handle(handle)
     {
-        _context.getPhysicalDeviceProperties(&_properties);
-        _context.getPhysicalDeviceFeatures(&_features);
+        _context->getPhysicalDeviceProperties(_handle, &_properties);
+        _context->getPhysicalDeviceFeatures(_handle, &_features);
     }
 
     PhysicalDeviceType PhysicalDevice::getType() const
@@ -28,10 +28,10 @@ namespace vulkan_renderer::core
     std::vector<QueueFamilyProperties> PhysicalDevice::getQueueFamilyProperties() const
     {
         uint32_t queueFamilyPropertyCount;
-        _context.getPhysicalDeviceQueueFamilyProperties(&queueFamilyPropertyCount, nullptr);
+        _context->getPhysicalDeviceQueueFamilyProperties(_handle, &queueFamilyPropertyCount, nullptr);
 
         std::vector<VkQueueFamilyProperties> rawQueueFamilyProperties(queueFamilyPropertyCount);
-        _context.getPhysicalDeviceQueueFamilyProperties(&queueFamilyPropertyCount, rawQueueFamilyProperties.data());
+        _context->getPhysicalDeviceQueueFamilyProperties(_handle, &queueFamilyPropertyCount, rawQueueFamilyProperties.data());
 
         std::vector<QueueFamilyProperties> queueFamilyProperties;
         for (uint32_t i = 0; i < rawQueueFamilyProperties.size(); ++i)

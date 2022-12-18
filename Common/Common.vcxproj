@@ -86,10 +86,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\common\utils\ProcedureRetriever.h" />
     <ClInclude Include="include\common\utils\SmartWrapper.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Stub.cpp" />
+    <ClCompile Include="src\utils\ProcedureRetriever.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
