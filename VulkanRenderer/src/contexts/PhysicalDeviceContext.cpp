@@ -18,9 +18,15 @@ namespace vulkan_renderer::contexts
         _vkGetPhysicalDeviceProperties(_handle, pProperties);
     }
 
+    void PhysicalDeviceContext::getPhysicalDeviceQueueFamilyProperties(uint32_t* pQueueFamilyPropertyCount, VkQueueFamilyProperties* pQueueFamilyProperties) const
+    {
+        _vkGetPhysicalDeviceQueueFamilyProperties(_handle, pQueueFamilyPropertyCount, pQueueFamilyProperties);
+    }
+
     void PhysicalDeviceContext::loadFunctions()
     {
         _vkGetPhysicalDeviceFeatures = (PFN_vkGetPhysicalDeviceFeatures)_instanceContext->getInstanceProcAddr("vkGetPhysicalDeviceFeatures");
         _vkGetPhysicalDeviceProperties = (PFN_vkGetPhysicalDeviceProperties)_instanceContext->getInstanceProcAddr("vkGetPhysicalDeviceProperties");
+        _vkGetPhysicalDeviceQueueFamilyProperties = (PFN_vkGetPhysicalDeviceQueueFamilyProperties)_instanceContext->getInstanceProcAddr("vkGetPhysicalDeviceQueueFamilyProperties");
     }
 }

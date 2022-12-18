@@ -94,6 +94,7 @@
     <ClInclude Include="src\core\Instance.h" />
     <ClInclude Include="src\core\PhysicalDevice.h" />
     <ClInclude Include="src\core\PhysicalDeviceType.h" />
+    <ClInclude Include="src\core\QueueFamilyProperties.h" />
     <ClInclude Include="src\helpers\Interoperability.h" />
   </ItemGroup>
   <ItemGroup>
@@ -101,6 +102,7 @@
     <ClCompile Include="src\contexts\PhysicalDeviceContext.cpp" />
     <ClCompile Include="src\core\Instance.cpp" />
     <ClCompile Include="src\core\PhysicalDevice.cpp" />
+    <ClCompile Include="src\core\QueueFamilyProperties.cpp" />
     <ClCompile Include="src\helpers\Interoperability.cpp" />
     <ClCompile Include="src\Test.cpp" />
   </ItemGroup>

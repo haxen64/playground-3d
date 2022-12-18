@@ -24,4 +24,19 @@ namespace vulkan_renderer::core
     {
         return _properties.deviceName;
     }
+
+    std::vector<QueueFamilyProperties> PhysicalDevice::getQueueFamilyProperties() const
+    {
+        uint32_t queueFamilyPropertyCount;
+        _context.getPhysicalDeviceQueueFamilyProperties(&queueFamilyPropertyCount, nullptr);
+
+        std::vector<VkQueueFamilyProperties> rawQueueFamilyProperties(queueFamilyPropertyCount);
+        _context.getPhysicalDeviceQueueFamilyProperties(&queueFamilyPropertyCount, rawQueueFamilyProperties.data());
+
+        std::vector<QueueFamilyProperties> queueFamilyProperties;
+        for (uint32_t i = 0; i < rawQueueFamilyProperties.size(); ++i)
+            queueFamilyProperties.push_back(QueueFamilyProperties(i, rawQueueFamilyProperties[i]));
+
+        return queueFamilyProperties;
+    }
 }

@@ -1,10 +1,12 @@
 #pragma once
 
+#include <vector>
 #include <vulkan/vulkan.h>
 
 #include "contexts/InstanceContext.h"
 #include "contexts/PhysicalDeviceContext.h"
 #include "core/PhysicalDeviceType.h"
+#include "core/QueueFamilyProperties.h"
 
 namespace vulkan_renderer::core
 {
@@ -15,6 +17,7 @@ namespace vulkan_renderer::core
 
         PhysicalDeviceType getType() const;
         const char* getName() const;
+        std::vector<QueueFamilyProperties> getQueueFamilyProperties() const;
 
     private:
         contexts::PhysicalDeviceContext _context;

@@ -1,6 +1,5 @@
 #include "Test.h"
 
-#include <iostream>
 #include "core/Instance.h"
 
 namespace vulkan_renderer
@@ -9,6 +8,6 @@ namespace vulkan_renderer
     {
         core::Instance instance;
         core::PhysicalDevice gpu = instance.getPhysicalDevice(core::PhysicalDeviceType::DiscreteGpu);
-        std::cout << gpu.getName() << std::endl;
+        auto queueFamilyProperties = gpu.getQueueFamilyProperties();
     }
 }
