@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestBed", "TestBed\TestBed.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VulkanRenderer", "VulkanRenderer\VulkanRenderer.vcxproj", "{91DD997D-5F14-41D3-B286-C0612BB9185B}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Common", "Common\Common.vcxproj", "{11BE8F42-AEF7-4245-B5F6-5D4A443308E0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,10 @@ Global
 		{91DD997D-5F14-41D3-B286-C0612BB9185B}.Debug|x64.Build.0 = Debug|x64
 		{91DD997D-5F14-41D3-B286-C0612BB9185B}.Release|x64.ActiveCfg = Release|x64
 		{91DD997D-5F14-41D3-B286-C0612BB9185B}.Release|x64.Build.0 = Release|x64
+		{11BE8F42-AEF7-4245-B5F6-5D4A443308E0}.Debug|x64.ActiveCfg = Debug|x64
+		{11BE8F42-AEF7-4245-B5F6-5D4A443308E0}.Debug|x64.Build.0 = Debug|x64
+		{11BE8F42-AEF7-4245-B5F6-5D4A443308E0}.Release|x64.ActiveCfg = Release|x64
+		{11BE8F42-AEF7-4245-B5F6-5D4A443308E0}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

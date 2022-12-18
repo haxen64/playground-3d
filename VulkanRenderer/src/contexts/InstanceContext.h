@@ -1,7 +1,9 @@
 #pragma once
 
 #include <vulkan/vulkan.h>
-#include "utils/ProcedureRetriever.h"
+#include <windows.h>
+
+#include <common/utils/SmartWrapper.h>
 
 namespace vulkan_renderer::contexts
 {
@@ -11,20 +13,16 @@ namespace vulkan_renderer::contexts
         InstanceContext();
 
         InstanceContext(const InstanceContext&) = delete;
-        InstanceContext(InstanceContext&&) = delete;
         InstanceContext& operator=(const InstanceContext&) = delete;
-        InstanceContext& operator=(InstanceContext&&) = delete;
 
-        PFN_vkGetPhysicalDeviceFeatures getPhysicalDeviceFeatures;
-        PFN_vkGetPhysicalDeviceProperties getPhysicalDeviceProperties;
-
+        void* getInstanceProcAddr(const char* pName) const;
         VkResult enumeratePhysicalDevices(uint32_t* pPhysicalDeviceCount, VkPhysicalDevice* pPhysicalDevices) const;
 
     private:
-        VkInstance _handle;
-        utils::ProcedureRetriever _vkProcedureRetriever;
-        utils::ProcedureRetriever _vkInstanceProcedureRetriever;
+        common::utils::SmartWrapper<HMODULE> _vulkanLibHandle;
+        common::utils::SmartWrapper<VkInstance> _handle;
 
+        PFN_vkGetInstanceProcAddr _vkGetInstanceProcAddr;
         PFN_vkEnumeratePhysicalDevices _vkEnumeratePhysicalDevices;
 
         void loadFunctions();

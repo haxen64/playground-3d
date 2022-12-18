@@ -13,19 +13,19 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{91dd997d-5f14-41d3-b286-c0612bb9185b}</ProjectGuid>
-    <RootNamespace>VulkanRenderer</RootNamespace>
+    <ProjectGuid>{11be8f42-aef7-4245-b5f6-5d4a443308e0}</ProjectGuid>
+    <RootNamespace>Common</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -44,25 +44,23 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
+    <OutDir>obj\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>obj\$(Platform)\$(Configuration)\</IntDir>
-    <TargetName>vulkan_renderer</TargetName>
     <PublicIncludeDirectories>include</PublicIncludeDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
+    <OutDir>obj\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>obj\$(Platform)\$(Configuration)\</IntDir>
-    <TargetName>vulkan_renderer</TargetName>
     <PublicIncludeDirectories>include</PublicIncludeDirectories>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;VULKAN_RENDERER_EXPORT;VK_NO_PROTOTYPES;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\Vulkan\include;include\vulkan_renderer;src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include\common;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>NotSet</SubSystem>
@@ -75,10 +73,10 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;VULKAN_RENDERER_EXPORT;VK_NO_PROTOTYPES;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\Vulkan\include;include\vulkan_renderer;src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include\common;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>NotSet</SubSystem>
@@ -88,26 +86,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="include\vulkan_renderer\Test.h" />
-    <ClInclude Include="src\contexts\InstanceContext.h" />
-    <ClInclude Include="src\contexts\PhysicalDeviceContext.h" />
-    <ClInclude Include="src\core\Instance.h" />
-    <ClInclude Include="src\core\PhysicalDevice.h" />
-    <ClInclude Include="src\core\PhysicalDeviceType.h" />
-    <ClInclude Include="src\helpers\Interoperability.h" />
+    <ClInclude Include="include\common\utils\SmartWrapper.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\contexts\InstanceContext.cpp" />
-    <ClCompile Include="src\contexts\PhysicalDeviceContext.cpp" />
-    <ClCompile Include="src\core\Instance.cpp" />
-    <ClCompile Include="src\core\PhysicalDevice.cpp" />
-    <ClCompile Include="src\helpers\Interoperability.cpp" />
-    <ClCompile Include="src\Test.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Common\Common.vcxproj">
-      <Project>{11be8f42-aef7-4245-b5f6-5d4a443308e0}</Project>
-    </ProjectReference>
+    <ClCompile Include="src\Stub.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -16,5 +16,10 @@ namespace vulkan_renderer::contexts
     private:
         const InstanceContext* _instanceContext;
         VkPhysicalDevice _handle;
+
+        PFN_vkGetPhysicalDeviceFeatures _vkGetPhysicalDeviceFeatures;
+        PFN_vkGetPhysicalDeviceProperties _vkGetPhysicalDeviceProperties;
+
+        void loadFunctions();
     };
 }
