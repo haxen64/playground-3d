@@ -7,7 +7,8 @@ namespace vulkan_renderer
     void test()
     {
         core::Instance instance;
-        core::PhysicalDevice gpu = instance.getPhysicalDevice(core::PhysicalDeviceType::DiscreteGpu);
+        auto gpu = instance.getPhysicalDevice(core::PhysicalDeviceType::DiscreteGpu);
         auto queueFamilyProperties = gpu.getQueueFamilyProperties();
+        auto device = instance.createDevice(gpu);
     }
 }

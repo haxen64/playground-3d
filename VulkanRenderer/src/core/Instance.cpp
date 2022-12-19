@@ -58,4 +58,10 @@ namespace vulkan_renderer::core
 
         return physicalDevices.front();
     }
+
+    Device* Instance::createDevice(const PhysicalDevice& physicalDevice)
+    {
+        _devices.push_back(std::make_unique<Device>(_context.get(), nullptr));
+        return _devices.back().get();
+    }
 }
