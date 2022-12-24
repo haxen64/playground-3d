@@ -87,7 +87,7 @@ namespace vulkan_renderer::core
         if (VK_SUCCESS != _context->createDevice(physicalDevice.getHandle(), &deviceCreateInfo, nullptr, &handle))
             throw std::runtime_error("Failed to create a logical device.");
 
-        _devices.push_back(std::make_unique<Device>(_context.get(), handle));
+        _devices.push_back(std::make_unique<Device>(_context.get(), handle, queueCreationDetailsList));
         return _devices.back().get();
     }
 }

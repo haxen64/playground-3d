@@ -27,5 +27,7 @@ namespace vulkan_renderer
             discretePhysicalDevice,
             core::DeviceCreationDetails(),
             { std::make_pair(graphicsQueueFamily, core::QueueCreationDetails(1, { 1.0f })) });
+
+        auto graphicsQueue = device->getQueues(graphicsQueueFamily).front();
     }
 }
