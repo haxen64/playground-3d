@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <optional>
+#include <utility>
 #include <vector>
 #include <vulkan/vulkan.h>
 #include <windows.h>
@@ -10,8 +11,11 @@
 
 #include "contexts/InstanceContext.h"
 #include "core/Device.h"
+#include "core/DeviceCreationDetails.h"
 #include "core/PhysicalDevice.h"
 #include "core/PhysicalDeviceType.h"
+#include "core/QueueCreationDetails.h"
+#include "core/QueueFamilyProperties.h"
 
 namespace vulkan_renderer::core
 {
@@ -22,7 +26,10 @@ namespace vulkan_renderer::core
 
         PhysicalDevice getPhysicalDevice(const std::optional<PhysicalDeviceType> preferredType = std::nullopt) const;
 
-        Device* createDevice(const PhysicalDevice& physicalDevice);
+        Device* createDevice(
+            const PhysicalDevice& physicalDevice,
+            const DeviceCreationDetails& deviceCreationDetails,
+            const std::vector<std::pair<QueueFamilyProperties, QueueCreationDetails>>& queueCreationDetailsList);
 
     private:
         std::unique_ptr<contexts::InstanceContext> _context;

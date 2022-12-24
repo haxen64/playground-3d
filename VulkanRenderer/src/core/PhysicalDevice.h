@@ -14,6 +14,7 @@ namespace vulkan_renderer::core
     public:
         PhysicalDevice(const contexts::InstanceContext* context, VkPhysicalDevice handle);
 
+        VkPhysicalDevice getHandle() const;
         PhysicalDeviceType getType() const;
         const char* getName() const;
         std::vector<QueueFamilyProperties> getQueueFamilyProperties() const;

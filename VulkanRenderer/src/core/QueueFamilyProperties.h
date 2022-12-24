@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cstdint>
 #include <vulkan/vulkan.h>
 
 namespace vulkan_renderer::core

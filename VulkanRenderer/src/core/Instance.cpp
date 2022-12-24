@@ -59,9 +59,42 @@ namespace vulkan_renderer::core
         return physicalDevices.front();
     }
 
-    Device* Instance::createDevice(const PhysicalDevice& physicalDevice)
+    Device* Instance::createDevice(
+        const PhysicalDevice& physicalDevice,
+        const DeviceCreationDetails& deviceCreationDetails,
+        const std::vector<std::pair<QueueFamilyProperties, QueueCreationDetails>>& queueCreationDetailsList)
     {
-        _devices.push_back(std::make_unique<Device>(_context.get(), nullptr));
+        std::vector<VkDeviceQueueCreateInfo> queueCreateInfos;
+        queueCreateInfos.reserve(queueCreationDetailsList.size());
+
+        for (const auto& queueCreationDetails : queueCreationDetailsList)
+        {
+            const auto& queueProperties = queueCreationDetails.first;
+            const auto& creationDetails = queueCreationDetails.second;
+
+            VkDeviceQueueCreateInfo queueCreateInfo{};
+            queueCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
+            queueCreateInfo.queueFamilyIndex = queueProperties.getId();
+            queueCreateInfo.queueCount = creationDetails.getCount();
+            queueCreateInfo.pQueuePriorities = creationDetails.getPriorities().data();
+
+            queueCreateInfos.push_back(queueCreateInfo);
+        }
+
+        VkPhysicalDeviceFeatures physicalDeviceFeatures{};
+
+        VkDeviceCreateInfo deviceCreateInfo{};
+        deviceCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
+        deviceCreateInfo.queueCreateInfoCount = queueCreateInfos.size();
+        deviceCreateInfo.pQueueCreateInfos = queueCreateInfos.data();
+        deviceCreateInfo.pEnabledFeatures = &physicalDeviceFeatures;
+
+        VkDevice handle;
+
+        if (_context->createDevice(physicalDevice.getHandle(), &deviceCreateInfo, nullptr, &handle))
+            throw std::runtime_error("Failed to create a logical device.");
+
+        _devices.push_back(std::make_unique<Device>(_context.get(), handle));
         return _devices.back().get();
     }
 }

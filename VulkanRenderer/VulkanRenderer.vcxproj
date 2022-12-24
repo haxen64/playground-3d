@@ -91,10 +91,12 @@
     <ClInclude Include="include\vulkan_renderer\Test.h" />
     <ClInclude Include="src\contexts\DeviceContext.h" />
     <ClInclude Include="src\contexts\InstanceContext.h" />
+    <ClInclude Include="src\core\DeviceCreationDetails.h" />
     <ClInclude Include="src\core\Instance.h" />
     <ClInclude Include="src\core\Device.h" />
     <ClInclude Include="src\core\PhysicalDevice.h" />
     <ClInclude Include="src\core\PhysicalDeviceType.h" />
+    <ClInclude Include="src\core\QueueCreationDetails.h" />
     <ClInclude Include="src\core\QueueFamilyProperties.h" />
     <ClInclude Include="src\helpers\Interoperability.h" />
   </ItemGroup>
@@ -102,8 +104,10 @@
     <ClCompile Include="src\contexts\DeviceContext.cpp" />
     <ClCompile Include="src\contexts\InstanceContext.cpp" />
     <ClCompile Include="src\core\Device.cpp" />
+    <ClCompile Include="src\core\DeviceCreationDetails.cpp" />
     <ClCompile Include="src\core\Instance.cpp" />
     <ClCompile Include="src\core\PhysicalDevice.cpp" />
+    <ClCompile Include="src\core\QueueCreationDetails.cpp" />
     <ClCompile Include="src\core\QueueFamilyProperties.cpp" />
     <ClCompile Include="src\helpers\Interoperability.cpp" />
     <ClCompile Include="src\Test.cpp" />

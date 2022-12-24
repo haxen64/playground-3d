@@ -9,6 +9,11 @@ namespace vulkan_renderer::core
         _context->getPhysicalDeviceFeatures(_handle, &_features);
     }
 
+    VkPhysicalDevice PhysicalDevice::getHandle() const
+    {
+        return _handle;
+    }
+
     PhysicalDeviceType PhysicalDevice::getType() const
     {
         switch (_properties.deviceType)
