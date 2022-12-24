@@ -1,5 +1,6 @@
 #pragma once
 
+#include <vulkan/vulkan.h>
 #include "contexts/InstanceContext.h"
 
 namespace vulkan_renderer::contexts

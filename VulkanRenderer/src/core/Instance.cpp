@@ -26,7 +26,7 @@ namespace vulkan_renderer::core
 
         VkInstance handle;
 
-        if (vkCreateInstance(&createInfo, nullptr, &handle) != VK_SUCCESS)
+        if (VK_SUCCESS != vkCreateInstance(&createInfo, nullptr, &handle))
             throw std::runtime_error("Failed to create a vulkan instance.");
 
         _handle = common::utils::SmartWrapper<VkInstance>(
@@ -36,7 +36,7 @@ namespace vulkan_renderer::core
         _context = std::make_unique<contexts::InstanceContext>(handle, vkGetInstanceProcAddr);
     }
 
-    PhysicalDevice Instance::getPhysicalDevice(const std::optional<PhysicalDeviceType> preferredType) const
+    std::vector<PhysicalDevice> Instance::getPhysicalDevices() const
     {
         uint32_t physicalDeviceCount;
         _context->enumeratePhysicalDevices(&physicalDeviceCount, nullptr);
@@ -44,19 +44,12 @@ namespace vulkan_renderer::core
         std::vector<VkPhysicalDevice> rawPhysicalDevices(physicalDeviceCount);
         _context->enumeratePhysicalDevices(&physicalDeviceCount, rawPhysicalDevices.data());
 
-        if (rawPhysicalDevices.empty())
-            throw std::runtime_error("Failed to find a physical device with Vulkan support.");
-
         std::vector<PhysicalDevice> physicalDevices;
 
         for (const auto& rawPhysicalDevice : rawPhysicalDevices)
-        {
             physicalDevices.push_back(PhysicalDevice(_context.get(), rawPhysicalDevice));
-            if (!preferredType.has_value() || physicalDevices.back().getType() == preferredType)
-                return physicalDevices.back();
-        }
 
-        return physicalDevices.front();
+        return physicalDevices;
     }
 
     Device* Instance::createDevice(
@@ -91,7 +84,7 @@ namespace vulkan_renderer::core
 
         VkDevice handle;
 
-        if (_context->createDevice(physicalDevice.getHandle(), &deviceCreateInfo, nullptr, &handle))
+        if (VK_SUCCESS != _context->createDevice(physicalDevice.getHandle(), &deviceCreateInfo, nullptr, &handle))
             throw std::runtime_error("Failed to create a logical device.");
 
         _devices.push_back(std::make_unique<Device>(_context.get(), handle));

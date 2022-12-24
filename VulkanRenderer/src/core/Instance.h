@@ -1,7 +1,6 @@
 #pragma once
 
 #include <memory>
-#include <optional>
 #include <utility>
 #include <vector>
 #include <vulkan/vulkan.h>
@@ -24,7 +23,7 @@ namespace vulkan_renderer::core
     public:
         Instance();
 
-        PhysicalDevice getPhysicalDevice(const std::optional<PhysicalDeviceType> preferredType = std::nullopt) const;
+        std::vector<PhysicalDevice> getPhysicalDevices() const;
 
         Device* createDevice(
             const PhysicalDevice& physicalDevice,

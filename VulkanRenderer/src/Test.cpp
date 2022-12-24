@@ -8,8 +8,15 @@ namespace vulkan_renderer
     void test()
     {
         core::Instance instance;
-        auto gpu = instance.getPhysicalDevice(core::PhysicalDeviceType::DiscreteGpu);
-        auto queueFamilyProperties = gpu.getQueueFamilyProperties();
+        auto physicalDevices = instance.getPhysicalDevices();
+
+        const auto& discretePhysicalDevice = *std::find_if(
+            physicalDevices.begin(),
+            physicalDevices.end(),
+            [](const core::PhysicalDevice& physicalDevice) { return physicalDevice.getType() == core::PhysicalDeviceType::DiscreteGpu; }
+        );
+
+        auto queueFamilyProperties = discretePhysicalDevice.getQueueFamilyProperties();
 
         const auto& graphicsQueueFamily = *std::find_if(
             queueFamilyProperties.begin(),
@@ -17,7 +24,7 @@ namespace vulkan_renderer
             [](const core::QueueFamilyProperties& properties) { return properties.supportsGraphics(); });
 
         auto device = instance.createDevice(
-            gpu,
+            discretePhysicalDevice,
             core::DeviceCreationDetails(),
             { std::make_pair(graphicsQueueFamily, core::QueueCreationDetails(1, { 1.0f })) });
     }
