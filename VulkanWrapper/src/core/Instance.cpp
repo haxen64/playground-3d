@@ -1,8 +1,6 @@
 #include "vulkan_wrapper/core/Instance.h"
 
 #include <stdexcept>
-#include <vector>
-
 #include "vulkan_wrapper/helpers/Interoperability.h"
 
 namespace vulkan_wrapper::core
@@ -36,24 +34,30 @@ namespace vulkan_wrapper::core
         _context = std::make_unique<contexts::InstanceContext>(handle, vkGetInstanceProcAddr);
     }
 
-    std::vector<PhysicalDevice> Instance::getPhysicalDevices() const
+    std::vector<const PhysicalDevice*> Instance::getPhysicalDevices() const
     {
-        uint32_t physicalDeviceCount;
-        _context->enumeratePhysicalDevices(&physicalDeviceCount, nullptr);
+        if (!_physicalDevices.has_value())
+        {
+            uint32_t physicalDeviceCount;
+            _context->enumeratePhysicalDevices(&physicalDeviceCount, nullptr);
 
-        std::vector<VkPhysicalDevice> rawPhysicalDevices(physicalDeviceCount);
-        _context->enumeratePhysicalDevices(&physicalDeviceCount, rawPhysicalDevices.data());
+            std::vector<VkPhysicalDevice> rawPhysicalDevices(physicalDeviceCount);
+            _context->enumeratePhysicalDevices(&physicalDeviceCount, rawPhysicalDevices.data());
 
-        std::vector<PhysicalDevice> physicalDevices;
+            _physicalDevices = std::vector<std::unique_ptr<PhysicalDevice>>();
+            for (const auto& rawPhysicalDevice : rawPhysicalDevices)
+                _physicalDevices.value().push_back(std::make_unique<PhysicalDevice>(_context.get(), rawPhysicalDevice));
+        }
 
-        for (const auto& rawPhysicalDevice : rawPhysicalDevices)
-            physicalDevices.push_back(PhysicalDevice(_context.get(), rawPhysicalDevice));
+        std::vector<const PhysicalDevice*> physicalDevicePointers;
+        for (const auto& physicalDevice : _physicalDevices.value())
+            physicalDevicePointers.push_back(physicalDevice.get());
 
-        return physicalDevices;
+        return physicalDevicePointers;
     }
 
     Device* Instance::createDevice(
-        const PhysicalDevice& physicalDevice,
+        const PhysicalDevice* physicalDevice,
         const auxiliary::DeviceCreationDetails& deviceCreationDetails,
         const std::vector<std::pair<auxiliary::QueueFamilyProperties, auxiliary::QueueCreationDetails>>& queueCreationDetailsList)
     {
@@ -84,7 +88,7 @@ namespace vulkan_wrapper::core
 
         VkDevice handle;
 
-        if (VK_SUCCESS != _context->createDevice(physicalDevice.getHandle(), &deviceCreateInfo, nullptr, &handle))
+        if (VK_SUCCESS != _context->createDevice(physicalDevice->getHandle(), &deviceCreateInfo, nullptr, &handle))
             throw std::runtime_error("Failed to create a logical device.");
 
         _devices.push_back(std::make_unique<Device>(_context.get(), handle, queueCreationDetailsList));

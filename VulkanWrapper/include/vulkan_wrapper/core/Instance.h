@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <optional>
 #include <utility>
 #include <vector>
 #include <windows.h>
@@ -24,10 +25,10 @@ namespace vulkan_wrapper::core
     public:
         Instance();
 
-        std::vector<PhysicalDevice> getPhysicalDevices() const;
+        std::vector<const PhysicalDevice*> getPhysicalDevices() const;
 
         Device* createDevice(
-            const PhysicalDevice& physicalDevice,
+            const PhysicalDevice* physicalDevice,
             const auxiliary::DeviceCreationDetails& deviceCreationDetails,
             const std::vector<std::pair<auxiliary::QueueFamilyProperties, auxiliary::QueueCreationDetails>>& queueCreationDetailsList);
 
@@ -36,6 +37,7 @@ namespace vulkan_wrapper::core
         common::utils::SmartWrapper<HMODULE> _vulkanLibHandle;
         common::utils::SmartWrapper<VkInstance> _handle;
 
+        mutable std::optional<std::vector<std::unique_ptr<PhysicalDevice>>> _physicalDevices;
         std::vector<std::unique_ptr<Device>> _devices;
     };
 }

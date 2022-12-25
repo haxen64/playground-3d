@@ -13,10 +13,10 @@ namespace vulkan_renderer
         const auto& discretePhysicalDevice = *std::find_if(
             physicalDevices.begin(),
             physicalDevices.end(),
-            [](const vulkan_wrapper::core::PhysicalDevice& physicalDevice) { return physicalDevice.getType() == vulkan_wrapper::auxiliary::PhysicalDeviceType::DiscreteGpu; }
+            [](const vulkan_wrapper::core::PhysicalDevice* physicalDevice) { return physicalDevice->getType() == vulkan_wrapper::auxiliary::PhysicalDeviceType::DiscreteGpu; }
         );
 
-        auto queueFamilyProperties = discretePhysicalDevice.getQueueFamilyProperties();
+        auto queueFamilyProperties = discretePhysicalDevice->getQueueFamilyProperties();
 
         const auto& graphicsQueueFamily = *std::find_if(
             queueFamilyProperties.begin(),
