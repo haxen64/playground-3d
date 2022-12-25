@@ -3,7 +3,7 @@
 #include <cstdint>
 #include <vector>
 
-namespace vulkan_renderer::core
+namespace vulkan_wrapper::core
 {
     class QueueCreationDetails
     {

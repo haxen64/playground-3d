@@ -3,7 +3,7 @@
 #include <windows.h>
 #include <common/utils/SmartWrapper.h>
 
-namespace vulkan_renderer::helpers
+namespace vulkan_wrapper::helpers
 {
     class Interoperability
     {

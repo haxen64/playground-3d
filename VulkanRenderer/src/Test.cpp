@@ -1,19 +1,19 @@
-#include "Test.h"
+#include "vulkan_renderer/Test.h"
 
 #include <algorithm>
-#include "core/Instance.h"
+#include <vulkan_wrapper/core/Instance.h>
 
 namespace vulkan_renderer
 {
     void test()
     {
-        core::Instance instance;
+        vulkan_wrapper::core::Instance instance;
         auto physicalDevices = instance.getPhysicalDevices();
 
         const auto& discretePhysicalDevice = *std::find_if(
             physicalDevices.begin(),
             physicalDevices.end(),
-            [](const core::PhysicalDevice& physicalDevice) { return physicalDevice.getType() == core::PhysicalDeviceType::DiscreteGpu; }
+            [](const vulkan_wrapper::core::PhysicalDevice& physicalDevice) { return physicalDevice.getType() == vulkan_wrapper::core::PhysicalDeviceType::DiscreteGpu; }
         );
 
         auto queueFamilyProperties = discretePhysicalDevice.getQueueFamilyProperties();
@@ -21,12 +21,12 @@ namespace vulkan_renderer
         const auto& graphicsQueueFamily = *std::find_if(
             queueFamilyProperties.begin(),
             queueFamilyProperties.end(),
-            [](const core::QueueFamilyProperties& properties) { return properties.supportsGraphics(); });
+            [](const vulkan_wrapper::core::QueueFamilyProperties& properties) { return properties.supportsGraphics(); });
 
         auto device = instance.createDevice(
             discretePhysicalDevice,
-            core::DeviceCreationDetails(),
-            { std::make_pair(graphicsQueueFamily, core::QueueCreationDetails(1, { 1.0f })) });
+            vulkan_wrapper::core::DeviceCreationDetails(),
+            { std::make_pair(graphicsQueueFamily, vulkan_wrapper::core::QueueCreationDetails(1, { 1.0f })) });
 
         auto graphicsQueue = device->getQueues(graphicsQueueFamily).front();
     }

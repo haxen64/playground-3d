@@ -1,6 +1,6 @@
-#include "core/Queue.h"
+#include "vulkan_wrapper/core/Queue.h"
 
-namespace vulkan_renderer::core
+namespace vulkan_wrapper::core
 {
     Queue::Queue(VkQueue handle)
         : _handle(handle)

@@ -1,6 +1,6 @@
-#include "core/QueueFamilyProperties.h"
+#include "vulkan_wrapper/core/QueueFamilyProperties.h"
 
-namespace vulkan_renderer::core
+namespace vulkan_wrapper::core
 {
     QueueFamilyProperties::QueueFamilyProperties(uint32_t id, VkQueueFamilyProperties properties)
         : _id(id), _properties(properties)

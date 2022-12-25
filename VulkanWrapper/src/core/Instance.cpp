@@ -1,11 +1,11 @@
-#include "core/Instance.h"
+#include "vulkan_wrapper/core/Instance.h"
 
 #include <stdexcept>
 #include <vector>
 
-#include "helpers/Interoperability.h"
+#include "vulkan_wrapper/helpers/Interoperability.h"
 
-namespace vulkan_renderer::core
+namespace vulkan_wrapper::core
 {
     Instance::Instance()
     {

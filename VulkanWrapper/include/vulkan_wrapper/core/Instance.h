@@ -3,20 +3,21 @@
 #include <memory>
 #include <utility>
 #include <vector>
-#include <vulkan/vulkan.h>
 #include <windows.h>
+
+#include <vulkan/vulkan.h>
 
 #include <common/utils/SmartWrapper.h>
 
-#include "contexts/InstanceContext.h"
-#include "core/Device.h"
-#include "core/DeviceCreationDetails.h"
-#include "core/PhysicalDevice.h"
-#include "core/PhysicalDeviceType.h"
-#include "core/QueueCreationDetails.h"
-#include "core/QueueFamilyProperties.h"
+#include "vulkan_wrapper/contexts/InstanceContext.h"
+#include "vulkan_wrapper/core/Device.h"
+#include "vulkan_wrapper/core/DeviceCreationDetails.h"
+#include "vulkan_wrapper/core/PhysicalDevice.h"
+#include "vulkan_wrapper/core/PhysicalDeviceType.h"
+#include "vulkan_wrapper/core/QueueCreationDetails.h"
+#include "vulkan_wrapper/core/QueueFamilyProperties.h"
 
-namespace vulkan_renderer::core
+namespace vulkan_wrapper::core
 {
     class Instance
     {

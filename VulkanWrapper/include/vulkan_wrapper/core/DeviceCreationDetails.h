@@ -1,6 +1,6 @@
 #pragma once
 
-namespace vulkan_renderer::core
+namespace vulkan_wrapper::core
 {
     class DeviceCreationDetails
     {

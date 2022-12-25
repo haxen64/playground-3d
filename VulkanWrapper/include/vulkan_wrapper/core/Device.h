@@ -4,15 +4,16 @@
 #include <unordered_map>
 #include <utility>
 #include <vector>
+
 #include <vulkan/vulkan.h>
 
-#include "contexts/DeviceContext.h"
-#include "contexts/InstanceContext.h"
-#include "core/Queue.h"
-#include "core/QueueCreationDetails.h"
-#include "core/QueueFamilyProperties.h"
+#include "vulkan_wrapper/contexts/DeviceContext.h"
+#include "vulkan_wrapper/contexts/InstanceContext.h"
+#include "vulkan_wrapper/core/Queue.h"
+#include "vulkan_wrapper/core/QueueCreationDetails.h"
+#include "vulkan_wrapper/core/QueueFamilyProperties.h"
 
-namespace vulkan_renderer::core
+namespace vulkan_wrapper::core
 {
     class Device
     {

@@ -3,7 +3,7 @@
 #include <vulkan/vulkan.h>
 #include <common/utils/ProcedureRetriever.h>
 
-namespace vulkan_renderer::contexts
+namespace vulkan_wrapper::contexts
 {
     class InstanceContext
     {

@@ -1,13 +1,14 @@
 #pragma once
 
 #include <vector>
+
 #include <vulkan/vulkan.h>
 
-#include "contexts/InstanceContext.h"
-#include "core/PhysicalDeviceType.h"
-#include "core/QueueFamilyProperties.h"
+#include "vulkan_wrapper/contexts/InstanceContext.h"
+#include "vulkan_wrapper/core/PhysicalDeviceType.h"
+#include "vulkan_wrapper/core/QueueFamilyProperties.h"
 
-namespace vulkan_renderer::core
+namespace vulkan_wrapper::core
 {
     class PhysicalDevice
     {

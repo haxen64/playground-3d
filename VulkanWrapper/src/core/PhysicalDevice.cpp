@@ -1,6 +1,6 @@
-#include "core/PhysicalDevice.h"
+#include "vulkan_wrapper/core/PhysicalDevice.h"
 
-namespace vulkan_renderer::core
+namespace vulkan_wrapper::core
 {
     PhysicalDevice::PhysicalDevice(const contexts::InstanceContext* context, VkPhysicalDevice handle)
         : _context(context), _handle(handle)

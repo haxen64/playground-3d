@@ -1,6 +1,6 @@
-#include "contexts/InstanceContext.h"
+#include "vulkan_wrapper/contexts/InstanceContext.h"
 
-namespace vulkan_renderer::contexts
+namespace vulkan_wrapper::contexts
 {
     InstanceContext::InstanceContext(VkInstance handle, PFN_vkGetInstanceProcAddr vkGetInstanceProcAddr)
         : _handle(handle)

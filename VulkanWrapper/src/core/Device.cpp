@@ -1,8 +1,8 @@
-#include "core/Device.h"
+#include "vulkan_wrapper/core/Device.h"
 
 #include <stdexcept>
 
-namespace vulkan_renderer::core
+namespace vulkan_wrapper::core
 {
     Device::Device(
         const contexts::InstanceContext* context,
