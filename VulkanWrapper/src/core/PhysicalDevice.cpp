@@ -14,14 +14,14 @@ namespace vulkan_wrapper::core
         return _handle;
     }
 
-    PhysicalDeviceType PhysicalDevice::getType() const
+    auxiliary::PhysicalDeviceType PhysicalDevice::getType() const
     {
         switch (_properties.deviceType)
         {
         case VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU:
-            return PhysicalDeviceType::DiscreteGpu;
+            return auxiliary::PhysicalDeviceType::DiscreteGpu;
         default:
-            return PhysicalDeviceType::Other;
+            return auxiliary::PhysicalDeviceType::Other;
         }
     }
 
@@ -30,7 +30,7 @@ namespace vulkan_wrapper::core
         return _properties.deviceName;
     }
 
-    std::vector<QueueFamilyProperties> PhysicalDevice::getQueueFamilyProperties() const
+    std::vector<auxiliary::QueueFamilyProperties> PhysicalDevice::getQueueFamilyProperties() const
     {
         uint32_t queueFamilyPropertyCount;
         _context->getPhysicalDeviceQueueFamilyProperties(_handle, &queueFamilyPropertyCount, nullptr);
@@ -38,9 +38,9 @@ namespace vulkan_wrapper::core
         std::vector<VkQueueFamilyProperties> rawQueueFamilyProperties(queueFamilyPropertyCount);
         _context->getPhysicalDeviceQueueFamilyProperties(_handle, &queueFamilyPropertyCount, rawQueueFamilyProperties.data());
 
-        std::vector<QueueFamilyProperties> queueFamilyProperties;
+        std::vector<auxiliary::QueueFamilyProperties> queueFamilyProperties;
         for (uint32_t i = 0; i < rawQueueFamilyProperties.size(); ++i)
-            queueFamilyProperties.push_back(QueueFamilyProperties(i, rawQueueFamilyProperties[i]));
+            queueFamilyProperties.push_back(auxiliary::QueueFamilyProperties(i, rawQueueFamilyProperties[i]));
 
         return queueFamilyProperties;
     }

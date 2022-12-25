@@ -7,7 +7,7 @@ namespace vulkan_wrapper::core
     Device::Device(
         const contexts::InstanceContext* context,
         VkDevice handle,
-        const std::vector<std::pair<QueueFamilyProperties, QueueCreationDetails>>& queueCreationDetailsList)
+        const std::vector<std::pair<auxiliary::QueueFamilyProperties, auxiliary::QueueCreationDetails>>& queueCreationDetailsList)
         : _instanceContext(context), _context(std::make_unique<contexts::DeviceContext>(context, handle)), _handle(handle)
     {
         for (const auto& queueCreationDetails : queueCreationDetailsList)
@@ -32,12 +32,12 @@ namespace vulkan_wrapper::core
             _instanceContext->destroyDevice(_handle, nullptr);
     }
 
-    const std::vector<Queue>& Device::getQueues(const QueueFamilyProperties& queueFamilyProperties) const
+    const std::vector<Queue>& Device::getQueues(const auxiliary::QueueFamilyProperties& queueFamilyProperties) const
     {
         auto queues = _queuesMap.find(queueFamilyProperties.getId());
 
         if (queues == _queuesMap.end())
-            throw std::invalid_argument("Failed to get queues vector.");
+            throw std::invalid_argument("Failed to get queues.");
         else
             return queues->second;
     }

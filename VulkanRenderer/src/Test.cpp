@@ -13,7 +13,7 @@ namespace vulkan_renderer
         const auto& discretePhysicalDevice = *std::find_if(
             physicalDevices.begin(),
             physicalDevices.end(),
-            [](const vulkan_wrapper::core::PhysicalDevice& physicalDevice) { return physicalDevice.getType() == vulkan_wrapper::core::PhysicalDeviceType::DiscreteGpu; }
+            [](const vulkan_wrapper::core::PhysicalDevice& physicalDevice) { return physicalDevice.getType() == vulkan_wrapper::auxiliary::PhysicalDeviceType::DiscreteGpu; }
         );
 
         auto queueFamilyProperties = discretePhysicalDevice.getQueueFamilyProperties();
@@ -21,13 +21,13 @@ namespace vulkan_renderer
         const auto& graphicsQueueFamily = *std::find_if(
             queueFamilyProperties.begin(),
             queueFamilyProperties.end(),
-            [](const vulkan_wrapper::core::QueueFamilyProperties& properties) { return properties.supportsGraphics(); });
+            [](const vulkan_wrapper::auxiliary::QueueFamilyProperties& properties) { return properties.supportsGraphics(); });
 
         auto device = instance.createDevice(
             discretePhysicalDevice,
-            vulkan_wrapper::core::DeviceCreationDetails(),
-            { std::make_pair(graphicsQueueFamily, vulkan_wrapper::core::QueueCreationDetails(1, { 1.0f })) });
+            vulkan_wrapper::auxiliary::DeviceCreationDetails(),
+            { std::make_pair(graphicsQueueFamily, vulkan_wrapper::auxiliary::QueueCreationDetails(1, { 1.0f })) });
 
-        auto graphicsQueue = device->getQueues(graphicsQueueFamily).front();
+        const auto& graphicsQueue = device->getQueues(graphicsQueueFamily).front();
     }
 }

@@ -1,8 +1,8 @@
-#include "vulkan_wrapper/core/QueueCreationDetails.h"
+#include "vulkan_wrapper/auxiliary/QueueCreationDetails.h"
 
 #include <stdexcept>
 
-namespace vulkan_wrapper::core
+namespace vulkan_wrapper::auxiliary
 {
     QueueCreationDetails::QueueCreationDetails(uint32_t count, const std::vector<float>& priorities)
         : _count(count), _priorities(priorities)

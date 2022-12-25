@@ -54,8 +54,8 @@ namespace vulkan_wrapper::core
 
     Device* Instance::createDevice(
         const PhysicalDevice& physicalDevice,
-        const DeviceCreationDetails& deviceCreationDetails,
-        const std::vector<std::pair<QueueFamilyProperties, QueueCreationDetails>>& queueCreationDetailsList)
+        const auxiliary::DeviceCreationDetails& deviceCreationDetails,
+        const std::vector<std::pair<auxiliary::QueueFamilyProperties, auxiliary::QueueCreationDetails>>& queueCreationDetailsList)
     {
         std::vector<VkDeviceQueueCreateInfo> queueCreateInfos;
         queueCreateInfos.reserve(queueCreationDetailsList.size());

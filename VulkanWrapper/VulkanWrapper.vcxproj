@@ -83,25 +83,25 @@
     <ClInclude Include="include\vulkan_wrapper\contexts\DeviceContext.h" />
     <ClInclude Include="include\vulkan_wrapper\contexts\InstanceContext.h" />
     <ClInclude Include="include\vulkan_wrapper\core\Device.h" />
-    <ClInclude Include="include\vulkan_wrapper\core\DeviceCreationDetails.h" />
+    <ClInclude Include="include\vulkan_wrapper\auxiliary\DeviceCreationDetails.h" />
     <ClInclude Include="include\vulkan_wrapper\core\Instance.h" />
     <ClInclude Include="include\vulkan_wrapper\core\PhysicalDevice.h" />
-    <ClInclude Include="include\vulkan_wrapper\core\PhysicalDeviceType.h" />
+    <ClInclude Include="include\vulkan_wrapper\auxiliary\PhysicalDeviceType.h" />
     <ClInclude Include="include\vulkan_wrapper\core\Queue.h" />
-    <ClInclude Include="include\vulkan_wrapper\core\QueueCreationDetails.h" />
-    <ClInclude Include="include\vulkan_wrapper\core\QueueFamilyProperties.h" />
+    <ClInclude Include="include\vulkan_wrapper\auxiliary\QueueCreationDetails.h" />
+    <ClInclude Include="include\vulkan_wrapper\auxiliary\QueueFamilyProperties.h" />
     <ClInclude Include="include\vulkan_wrapper\helpers\Interoperability.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\contexts\DeviceContext.cpp" />
     <ClCompile Include="src\contexts\InstanceContext.cpp" />
     <ClCompile Include="src\core\Device.cpp" />
-    <ClCompile Include="src\core\DeviceCreationDetails.cpp" />
+    <ClCompile Include="src\auxiliary\DeviceCreationDetails.cpp" />
     <ClCompile Include="src\core\Instance.cpp" />
     <ClCompile Include="src\core\PhysicalDevice.cpp" />
     <ClCompile Include="src\core\Queue.cpp" />
-    <ClCompile Include="src\core\QueueCreationDetails.cpp" />
-    <ClCompile Include="src\core\QueueFamilyProperties.cpp" />
+    <ClCompile Include="src\auxiliary\QueueCreationDetails.cpp" />
+    <ClCompile Include="src\auxiliary\QueueFamilyProperties.cpp" />
     <ClCompile Include="src\helpers\Interoperability.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -3,7 +3,7 @@
 #include <cstdint>
 #include <vulkan/vulkan.h>
 
-namespace vulkan_wrapper::core
+namespace vulkan_wrapper::auxiliary
 {
     class QueueFamilyProperties
     {

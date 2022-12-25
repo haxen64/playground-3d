@@ -1,6 +1,6 @@
 #pragma once
 
-namespace vulkan_wrapper::core
+namespace vulkan_wrapper::auxiliary
 {
     enum class PhysicalDeviceType
     {

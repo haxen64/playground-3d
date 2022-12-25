@@ -9,13 +9,13 @@
 
 #include <common/utils/SmartWrapper.h>
 
+#include "vulkan_wrapper/auxiliary/DeviceCreationDetails.h"
+#include "vulkan_wrapper/auxiliary/PhysicalDeviceType.h"
+#include "vulkan_wrapper/auxiliary/QueueCreationDetails.h"
+#include "vulkan_wrapper/auxiliary/QueueFamilyProperties.h"
 #include "vulkan_wrapper/contexts/InstanceContext.h"
 #include "vulkan_wrapper/core/Device.h"
-#include "vulkan_wrapper/core/DeviceCreationDetails.h"
 #include "vulkan_wrapper/core/PhysicalDevice.h"
-#include "vulkan_wrapper/core/PhysicalDeviceType.h"
-#include "vulkan_wrapper/core/QueueCreationDetails.h"
-#include "vulkan_wrapper/core/QueueFamilyProperties.h"
 
 namespace vulkan_wrapper::core
 {
@@ -28,8 +28,8 @@ namespace vulkan_wrapper::core
 
         Device* createDevice(
             const PhysicalDevice& physicalDevice,
-            const DeviceCreationDetails& deviceCreationDetails,
-            const std::vector<std::pair<QueueFamilyProperties, QueueCreationDetails>>& queueCreationDetailsList);
+            const auxiliary::DeviceCreationDetails& deviceCreationDetails,
+            const std::vector<std::pair<auxiliary::QueueFamilyProperties, auxiliary::QueueCreationDetails>>& queueCreationDetailsList);
 
     private:
         std::unique_ptr<contexts::InstanceContext> _context;

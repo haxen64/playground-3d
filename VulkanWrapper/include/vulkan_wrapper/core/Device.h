@@ -7,11 +7,11 @@
 
 #include <vulkan/vulkan.h>
 
+#include "vulkan_wrapper/auxiliary/QueueCreationDetails.h"
+#include "vulkan_wrapper/auxiliary/QueueFamilyProperties.h"
 #include "vulkan_wrapper/contexts/DeviceContext.h"
 #include "vulkan_wrapper/contexts/InstanceContext.h"
 #include "vulkan_wrapper/core/Queue.h"
-#include "vulkan_wrapper/core/QueueCreationDetails.h"
-#include "vulkan_wrapper/core/QueueFamilyProperties.h"
 
 namespace vulkan_wrapper::core
 {
@@ -21,10 +21,10 @@ namespace vulkan_wrapper::core
         Device(
             const contexts::InstanceContext* context,
             VkDevice handle,
-            const std::vector<std::pair<QueueFamilyProperties, QueueCreationDetails>>& queueCreationDetailsList);
+            const std::vector<std::pair<auxiliary::QueueFamilyProperties, auxiliary::QueueCreationDetails>>& queueCreationDetailsList);
         ~Device();
 
-        const std::vector<Queue>& getQueues(const QueueFamilyProperties& queueFamilyProperties) const;
+        const std::vector<Queue>& getQueues(const auxiliary::QueueFamilyProperties& queueFamilyProperties) const;
 
     private:
         const contexts::InstanceContext* _instanceContext;

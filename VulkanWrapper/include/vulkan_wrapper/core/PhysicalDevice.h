@@ -4,9 +4,9 @@
 
 #include <vulkan/vulkan.h>
 
+#include "vulkan_wrapper/auxiliary/PhysicalDeviceType.h"
+#include "vulkan_wrapper/auxiliary/QueueFamilyProperties.h"
 #include "vulkan_wrapper/contexts/InstanceContext.h"
-#include "vulkan_wrapper/core/PhysicalDeviceType.h"
-#include "vulkan_wrapper/core/QueueFamilyProperties.h"
 
 namespace vulkan_wrapper::core
 {
@@ -16,9 +16,9 @@ namespace vulkan_wrapper::core
         PhysicalDevice(const contexts::InstanceContext* context, VkPhysicalDevice handle);
 
         VkPhysicalDevice getHandle() const;
-        PhysicalDeviceType getType() const;
+        auxiliary::PhysicalDeviceType getType() const;
         const char* getName() const;
-        std::vector<QueueFamilyProperties> getQueueFamilyProperties() const;
+        std::vector<auxiliary::QueueFamilyProperties> getQueueFamilyProperties() const;
 
     private:
         const contexts::InstanceContext* _context;
