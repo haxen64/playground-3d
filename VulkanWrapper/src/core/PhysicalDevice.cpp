@@ -40,7 +40,7 @@ namespace vulkan_wrapper::core
 
         std::vector<auxiliary::QueueFamilyProperties> queueFamilyProperties;
         for (uint32_t i = 0; i < rawQueueFamilyProperties.size(); ++i)
-            queueFamilyProperties.push_back(auxiliary::QueueFamilyProperties(i, rawQueueFamilyProperties[i]));
+            queueFamilyProperties.emplace_back(i, rawQueueFamilyProperties[i]);
 
         return queueFamilyProperties;
     }

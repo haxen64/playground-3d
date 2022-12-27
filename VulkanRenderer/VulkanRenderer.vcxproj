@@ -80,18 +80,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Test.cpp" />
+    <ClCompile Include="src\core\VulkanPhysicalDevice.cpp" />
+    <ClCompile Include="src\core\VulkanRenderingEnvironment.cpp" />
+    <ClCompile Include="src\Entry.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.vcxproj">
       <Project>{d1514ff7-ad06-4bf1-bf3a-befd85e33c3e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\GenericRenderer\GenericRenderer.vcxproj">
+      <Project>{1055ccc5-225a-4490-b652-068bd1f4c86e}</Project>
     </ProjectReference>
     <ProjectReference Include="..\VulkanWrapper\VulkanWrapper.vcxproj">
       <Project>{771bfa95-5931-45eb-901c-ecdbfe2e0645}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Test.h" />
+    <ClInclude Include="src\core\VulkanPhysicalDevice.h" />
+    <ClInclude Include="src\core\VulkanRenderingEnvironment.h" />
+    <ClInclude Include="src\Entry.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

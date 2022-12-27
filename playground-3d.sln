@@ -14,6 +14,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Common", "Common\Common.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VulkanRenderer", "VulkanRenderer\VulkanRenderer.vcxproj", "{20780779-6F55-4AC3-B6AF-D666FF13089F}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GenericRenderer", "GenericRenderer\GenericRenderer.vcxproj", "{1055CCC5-225A-4490-B652-068BD1F4C86E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -36,6 +38,10 @@ Global
 		{20780779-6F55-4AC3-B6AF-D666FF13089F}.Debug|x64.Build.0 = Debug|x64
 		{20780779-6F55-4AC3-B6AF-D666FF13089F}.Release|x64.ActiveCfg = Release|x64
 		{20780779-6F55-4AC3-B6AF-D666FF13089F}.Release|x64.Build.0 = Release|x64
+		{1055CCC5-225A-4490-B652-068BD1F4C86E}.Debug|x64.ActiveCfg = Debug|x64
+		{1055CCC5-225A-4490-B652-068BD1F4C86E}.Debug|x64.Build.0 = Debug|x64
+		{1055CCC5-225A-4490-B652-068BD1F4C86E}.Release|x64.ActiveCfg = Release|x64
+		{1055CCC5-225A-4490-B652-068BD1F4C86E}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

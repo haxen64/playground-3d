@@ -1,15 +1,33 @@
-#include "Test.h"
+#include "core/VulkanRenderingEnvironment.h"
 
-#include <algorithm>
-#include <iostream>
-#include <stdexcept>
-#include <vulkan_wrapper/core/Instance.h>
-
-namespace vulkan_renderer
+namespace vulkan_renderer::core
 {
-    void test()
+    VulkanRenderingEnvironment::VulkanRenderingEnvironment()
     {
-        try
+        auto physicalDevices = _vulkanInstance.getPhysicalDevices();
+
+        for (const auto& physicalDevice : physicalDevices)
+            _physicalDevices.emplace_back(physicalDevice);
+
+        for (const auto& physicalDevice : _physicalDevices)
+            _physicalDevicePointers.push_back(&physicalDevice);
+
+        _physicalDevicePointers.push_back(nullptr);
+    }
+
+    void VulkanRenderingEnvironment::release()
+    {
+        delete this;
+    }
+
+    const generic_renderer::core::IPhysicalDevice** VulkanRenderingEnvironment::getAvailablePhysicalDevices()
+    {
+        return _physicalDevicePointers.data();
+    }
+
+    void VulkanRenderingEnvironment::test()
+    {
+        /*try
         {
             vulkan_wrapper::core::Instance instance;
             auto physicalDevices = instance.getPhysicalDevices();
@@ -37,6 +55,6 @@ namespace vulkan_renderer
         catch (const std::exception& e)
         {
             std::cout << "An unhandled exception has been raised:" << std::endl << "\t" << e.what() << std::endl;
-        }
+        }*/
     }
 }
