@@ -1,9 +1,9 @@
 #pragma once
 
 #include <windows.h>
-#include <common/utils/SmartWrapper.h>
+#include "common/utils/SmartWrapper.h"
 
-namespace vulkan_wrapper::helpers
+namespace common::helpers
 {
     class Interoperability
     {

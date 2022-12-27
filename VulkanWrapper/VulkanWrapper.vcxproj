@@ -90,7 +90,6 @@
     <ClInclude Include="include\vulkan_wrapper\core\Queue.h" />
     <ClInclude Include="include\vulkan_wrapper\auxiliary\QueueCreationDetails.h" />
     <ClInclude Include="include\vulkan_wrapper\auxiliary\QueueFamilyProperties.h" />
-    <ClInclude Include="include\vulkan_wrapper\helpers\Interoperability.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\contexts\DeviceContext.cpp" />
@@ -102,7 +101,6 @@
     <ClCompile Include="src\core\Queue.cpp" />
     <ClCompile Include="src\auxiliary\QueueCreationDetails.cpp" />
     <ClCompile Include="src\auxiliary\QueueFamilyProperties.cpp" />
-    <ClCompile Include="src\helpers\Interoperability.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.vcxproj">

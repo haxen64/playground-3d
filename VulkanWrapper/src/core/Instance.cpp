@@ -1,13 +1,13 @@
 #include "vulkan_wrapper/core/Instance.h"
 
 #include <stdexcept>
-#include "vulkan_wrapper/helpers/Interoperability.h"
+#include <common/helpers/Interoperability.h>
 
 namespace vulkan_wrapper::core
 {
     Instance::Instance()
     {
-        _vulkanLibHandle = helpers::Interoperability::LoadWindowsLibrary("vulkan-1.dll");
+        _vulkanLibHandle = common::helpers::Interoperability::LoadWindowsLibrary("vulkan-1.dll");
 
         PFN_vkGetInstanceProcAddr vkGetInstanceProcAddr = (PFN_vkGetInstanceProcAddr)GetProcAddress(_vulkanLibHandle.value(), "vkGetInstanceProcAddr");
         PFN_vkCreateInstance vkCreateInstance = (PFN_vkCreateInstance)vkGetInstanceProcAddr(nullptr, "vkCreateInstance");

@@ -81,8 +81,8 @@
     <ClCompile Include="src\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\VulkanRenderer\VulkanRenderer.vcxproj">
-      <Project>{20780779-6f55-4ac3-b6af-d666ff13089f}</Project>
+    <ProjectReference Include="..\Common\Common.vcxproj">
+      <Project>{d1514ff7-ad06-4bf1-bf3a-befd85e33c3e}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

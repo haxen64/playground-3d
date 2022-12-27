@@ -1,17 +1,9 @@
-#include <iostream>
-#include <stdexcept>
-#include <vulkan_renderer/Test.h>
+#include <common/helpers/Interoperability.h>
 
 int main()
 {
-    try
-    {
-        vulkan_renderer::test();
-    }
-    catch (const std::exception& e)
-    {
-        std::cout << "An unhandled exception has been raised:" << std::endl << "\t" << e.what() << std::endl;
-    }
-
+    auto vulkanRendererLibHandle = common::helpers::Interoperability::LoadWindowsLibrary("vulkan_renderer.dll");
+    auto test = (void(*)())GetProcAddress(vulkanRendererLibHandle.value(), "test");
+    test();
     return 0;
 }

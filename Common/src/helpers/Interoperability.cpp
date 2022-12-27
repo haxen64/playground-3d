@@ -1,9 +1,9 @@
-#include "vulkan_wrapper/helpers/Interoperability.h"
+#include "common/helpers/Interoperability.h"
 
 #include <format>
 #include <stdexcept>
 
-namespace vulkan_wrapper::helpers
+namespace common::helpers
 {
     common::utils::SmartWrapper<HMODULE> Interoperability::LoadWindowsLibrary(const char* libFileName)
     {
