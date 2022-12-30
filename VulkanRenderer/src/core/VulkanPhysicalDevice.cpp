@@ -7,6 +7,11 @@ namespace vulkan_renderer::core
     {
     }
 
+    const vulkan_wrapper::core::PhysicalDevice* VulkanPhysicalDevice::getHandle() const
+    {
+        return _physicalDevice;
+    }
+
     const char* VulkanPhysicalDevice::getName() const
     {
         return _physicalDevice->getName();

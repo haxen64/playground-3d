@@ -10,6 +10,7 @@ namespace vulkan_renderer::core
     public:
         VulkanPhysicalDevice(const vulkan_wrapper::core::PhysicalDevice* physicalDevice);
 
+        const vulkan_wrapper::core::PhysicalDevice* getHandle() const;
         const char* getName() const override;
 
     private:

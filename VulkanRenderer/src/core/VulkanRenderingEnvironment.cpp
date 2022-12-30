@@ -1,5 +1,8 @@
 #include "core/VulkanRenderingEnvironment.h"
 
+#include <algorithm>
+#include <stdexcept>
+
 namespace vulkan_renderer::core
 {
     VulkanRenderingEnvironment::VulkanRenderingEnvironment()
@@ -7,10 +10,10 @@ namespace vulkan_renderer::core
         auto physicalDevices = _vulkanInstance.getPhysicalDevices();
 
         for (const auto& physicalDevice : physicalDevices)
-            _physicalDevices.emplace_back(physicalDevice);
+            _physicalDevices.push_back(std::make_unique<VulkanPhysicalDevice>(physicalDevice));
 
         for (const auto& physicalDevice : _physicalDevices)
-            _physicalDevicePointers.push_back(&physicalDevice);
+            _physicalDevicePointers.push_back(physicalDevice.get());
 
         _physicalDevicePointers.push_back(nullptr);
     }
@@ -25,36 +28,31 @@ namespace vulkan_renderer::core
         return _physicalDevicePointers.data();
     }
 
-    void VulkanRenderingEnvironment::test()
+    generic_renderer::core::IWindow* VulkanRenderingEnvironment::createWindow(const generic_renderer::core::IPhysicalDevice* physicalDevice)
     {
-        /*try
-        {
-            vulkan_wrapper::core::Instance instance;
-            auto physicalDevices = instance.getPhysicalDevices();
+        auto selectedPhysicalDevice = std::find_if(
+            _physicalDevices.begin(),
+            _physicalDevices.end(),
+            [=](const std::unique_ptr<VulkanPhysicalDevice>& device) { return device.get() == physicalDevice; }
+        );
 
-            const auto& discretePhysicalDevice = *std::find_if(
-                physicalDevices.begin(),
-                physicalDevices.end(),
-                [](const vulkan_wrapper::core::PhysicalDevice* physicalDevice) { return physicalDevice->getType() == vulkan_wrapper::auxiliary::PhysicalDeviceType::DiscreteGpu; }
-            );
+        if (selectedPhysicalDevice == _physicalDevices.end())
+            throw std::invalid_argument("Invalid physical device pointer.");
 
-            auto queueFamilyProperties = discretePhysicalDevice->getQueueFamilyProperties();
+        auto physicalDeviceHandle = selectedPhysicalDevice->get()->getHandle();
+        auto queueFamilyProperties = physicalDeviceHandle->getQueueFamilyProperties();
 
-            const auto& graphicsQueueFamily = *std::find_if(
-                queueFamilyProperties.begin(),
-                queueFamilyProperties.end(),
-                [](const vulkan_wrapper::auxiliary::QueueFamilyProperties& properties) { return properties.supportsGraphics(); });
+        const auto& graphicsQueueFamily = *std::find_if(
+            queueFamilyProperties.begin(),
+            queueFamilyProperties.end(),
+            [](const vulkan_wrapper::auxiliary::QueueFamilyProperties& properties) { return properties.supportsGraphics(); });
 
-            auto device = instance.createDevice(
-                discretePhysicalDevice,
-                vulkan_wrapper::auxiliary::DeviceCreationDetails(),
-                { std::make_pair(graphicsQueueFamily, vulkan_wrapper::auxiliary::QueueCreationDetails(1, { 1.0f })) });
+        auto device = _vulkanInstance.createDevice(
+            physicalDeviceHandle,
+            vulkan_wrapper::auxiliary::DeviceCreationDetails(),
+            { std::make_pair(graphicsQueueFamily, vulkan_wrapper::auxiliary::QueueCreationDetails(1, { 1.0f })) });
 
-            const auto& graphicsQueue = device->getQueues(graphicsQueueFamily).front();
-        }
-        catch (const std::exception& e)
-        {
-            std::cout << "An unhandled exception has been raised:" << std::endl << "\t" << e.what() << std::endl;
-        }*/
+        _windows.push_back(std::make_unique<VulkanWindow>(device));
+        return _windows.back().get();
     }
 }

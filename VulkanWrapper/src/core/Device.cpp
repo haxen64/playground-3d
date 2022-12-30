@@ -28,8 +28,7 @@ namespace vulkan_wrapper::core
 
     Device::~Device()
     {
-        if (_context)
-            _instanceContext->destroyDevice(_handle, nullptr);
+        _instanceContext->destroyDevice(_handle, nullptr);
     }
 
     const std::vector<Queue>& Device::getQueues(const auxiliary::QueueFamilyProperties& queueFamilyProperties) const
