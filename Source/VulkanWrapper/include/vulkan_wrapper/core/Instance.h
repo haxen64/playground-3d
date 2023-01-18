@@ -1,15 +1,5 @@
 #pragma once
 
-#include <memory>
-#include <optional>
-#include <utility>
-#include <vector>
-#include <windows.h>
-
-#include <vulkan/vulkan.h>
-
-#include <common/utils/SmartWrapper.h>
-
 #include "vulkan_wrapper/auxiliary/DeviceCreationDetails.h"
 #include "vulkan_wrapper/auxiliary/PhysicalDeviceType.h"
 #include "vulkan_wrapper/auxiliary/QueueCreationDetails.h"
@@ -17,6 +7,15 @@
 #include "vulkan_wrapper/contexts/InstanceContext.h"
 #include "vulkan_wrapper/core/Device.h"
 #include "vulkan_wrapper/core/PhysicalDevice.h"
+
+#include <common/utils/SmartWrapper.h>
+
+#include <memory>
+#include <optional>
+#include <utility>
+#include <vector>
+#include <vulkan/vulkan.h>
+#include <windows.h>
 
 namespace vulkan_wrapper::core
 {

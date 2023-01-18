@@ -1,8 +1,8 @@
 #pragma once
 
-#include <vulkan/vulkan.h>
-#include <common/utils/ProcedureRetriever.h>
 #include "vulkan_wrapper/contexts/InstanceContext.h"
+#include <common/utils/ProcedureRetriever.h>
+#include <vulkan/vulkan.h>
 
 namespace vulkan_wrapper::contexts
 {

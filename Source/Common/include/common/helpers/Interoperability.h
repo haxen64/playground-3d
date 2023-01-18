@@ -1,7 +1,7 @@
 #pragma once
 
-#include <windows.h>
 #include "common/utils/SmartWrapper.h"
+#include <windows.h>
 
 namespace common::helpers
 {

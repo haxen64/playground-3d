@@ -1,12 +1,11 @@
 #pragma once
 
-#include <vector>
-
-#include <vulkan/vulkan.h>
-
 #include "vulkan_wrapper/auxiliary/PhysicalDeviceType.h"
 #include "vulkan_wrapper/auxiliary/QueueFamilyProperties.h"
 #include "vulkan_wrapper/contexts/InstanceContext.h"
+
+#include <vector>
+#include <vulkan/vulkan.h>
 
 namespace vulkan_wrapper::core
 {
