@@ -2,7 +2,7 @@
 
 namespace generic_renderer::core
 {
-    class IWindow
+    class IRenderingSurface
     {
     public:
     };

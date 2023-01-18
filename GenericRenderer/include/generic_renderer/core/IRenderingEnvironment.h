@@ -1,7 +1,7 @@
 #pragma once
 
 #include "generic_renderer/core/IPhysicalDevice.h"
-#include "generic_renderer/core/IWindow.h"
+#include "generic_renderer/core/IRenderingSurface.h"
 
 namespace generic_renderer::core
 {
@@ -11,6 +11,6 @@ namespace generic_renderer::core
         virtual void release() = 0;
         
         virtual const IPhysicalDevice** getAvailablePhysicalDevices() = 0;
-        virtual IWindow* createWindow(const IPhysicalDevice* physicalDevice) = 0;
+        virtual IRenderingSurface* createRenderingSurface(const IPhysicalDevice* physicalDevice) = 0;
     };
 }

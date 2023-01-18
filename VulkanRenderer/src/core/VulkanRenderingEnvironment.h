@@ -8,7 +8,7 @@
 #include <vulkan_wrapper/core/Instance.h>
 
 #include "core/VulkanPhysicalDevice.h"
-#include "core/VulkanWindow.h"
+#include "core/VulkanRenderingSurface.h"
 
 namespace vulkan_renderer::core
 {
@@ -19,12 +19,12 @@ namespace vulkan_renderer::core
         void release() override;
 
         const generic_renderer::core::IPhysicalDevice** getAvailablePhysicalDevices() override;
-        generic_renderer::core::IWindow* createWindow(const generic_renderer::core::IPhysicalDevice* physicalDevice) override;
+        generic_renderer::core::IRenderingSurface* createRenderingSurface(const generic_renderer::core::IPhysicalDevice* physicalDevice) override;
 
     private:
         vulkan_wrapper::core::Instance _vulkanInstance;
         std::vector<std::unique_ptr<VulkanPhysicalDevice>> _physicalDevices;
         std::vector<const generic_renderer::core::IPhysicalDevice*> _physicalDevicePointers;
-        std::vector<std::unique_ptr<VulkanWindow>> _windows;
+        std::vector<std::unique_ptr<VulkanRenderingSurface>> _renderingSurfaces;
     };
 }
