@@ -2,7 +2,7 @@
 
 namespace generic_renderer::core
 {
-    class IRenderingSurface
+    class IRenderingWorld
     {
     public:
     };

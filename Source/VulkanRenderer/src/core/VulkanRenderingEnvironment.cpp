@@ -28,7 +28,7 @@ namespace vulkan_renderer::core
         return _physicalDevicePointers.data();
     }
 
-    generic_renderer::core::IRenderingSurface* VulkanRenderingEnvironment::createRenderingSurface(const generic_renderer::core::IPhysicalDevice* physicalDevice)
+    generic_renderer::core::IRenderingWorld* VulkanRenderingEnvironment::createRenderingWorld(const generic_renderer::core::IPhysicalDevice* physicalDevice)
     {
         auto selectedPhysicalDevice = std::find_if(
             _physicalDevices.begin(),
@@ -52,7 +52,7 @@ namespace vulkan_renderer::core
             vulkan_wrapper::auxiliary::DeviceCreationDetails(),
             { std::make_pair(graphicsQueueFamily, vulkan_wrapper::auxiliary::QueueCreationDetails(1, { 1.0f })) });
 
-        _renderingSurfaces.push_back(std::make_unique<VulkanRenderingSurface>(device));
-        return _renderingSurfaces.back().get();
+        _worlds.push_back(std::make_unique<VulkanRenderingWorld>(device));
+        return _worlds.back().get();
     }
 }

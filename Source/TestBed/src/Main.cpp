@@ -7,7 +7,7 @@ int main()
     auto createRenderingEnvironment = (generic_renderer::core::IRenderingEnvironment * (*)())GetProcAddress(vulkanRendererLibHandle.value(), "createRenderingEnvironment");
     auto renderingEnvironment = createRenderingEnvironment();
     auto physicalDevice = *renderingEnvironment->getAvailablePhysicalDevices();
-    auto renderingSurface = renderingEnvironment->createRenderingSurface(physicalDevice);
+    auto renderingWorld = renderingEnvironment->createRenderingWorld(physicalDevice);
     renderingEnvironment->release();
     return 0;
 }
