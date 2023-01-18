@@ -13,8 +13,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{d1514ff7-ad06-4bf1-bf3a-befd85e33c3e}</ProjectGuid>
-    <RootNamespace>Common</RootNamespace>
+    <ProjectGuid>{771bfa95-5931-45eb-901c-ecdbfe2e0645}</ProjectGuid>
+    <RootNamespace>VulkanWrapper</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -38,25 +38,26 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\PropertySheets\StaticLibSheet.props" />
+    <Import Project="..\..\PropertySheets\StaticLibSheet.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\PropertySheets\StaticLibSheet.props" />
+    <Import Project="..\..\PropertySheets\StaticLibSheet.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <TargetName>common</TargetName>
+    <TargetName>vulkan_wrapper</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <TargetName>common</TargetName>
+    <TargetName>vulkan_wrapper</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;VK_NO_PROTOTYPES;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\Vulkan\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -68,8 +69,9 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;VK_NO_PROTOTYPES;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\Vulkan\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -78,13 +80,32 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="include\common\helpers\Interoperability.h" />
-    <ClInclude Include="include\common\utils\ProcedureRetriever.h" />
-    <ClInclude Include="include\common\utils\SmartWrapper.h" />
+    <ClInclude Include="include\vulkan_wrapper\contexts\DeviceContext.h" />
+    <ClInclude Include="include\vulkan_wrapper\contexts\InstanceContext.h" />
+    <ClInclude Include="include\vulkan_wrapper\core\Device.h" />
+    <ClInclude Include="include\vulkan_wrapper\auxiliary\DeviceCreationDetails.h" />
+    <ClInclude Include="include\vulkan_wrapper\core\Instance.h" />
+    <ClInclude Include="include\vulkan_wrapper\core\PhysicalDevice.h" />
+    <ClInclude Include="include\vulkan_wrapper\auxiliary\PhysicalDeviceType.h" />
+    <ClInclude Include="include\vulkan_wrapper\core\Queue.h" />
+    <ClInclude Include="include\vulkan_wrapper\auxiliary\QueueCreationDetails.h" />
+    <ClInclude Include="include\vulkan_wrapper\auxiliary\QueueFamilyProperties.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\helpers\Interoperability.cpp" />
-    <ClCompile Include="src\utils\ProcedureRetriever.cpp" />
+    <ClCompile Include="src\contexts\DeviceContext.cpp" />
+    <ClCompile Include="src\contexts\InstanceContext.cpp" />
+    <ClCompile Include="src\core\Device.cpp" />
+    <ClCompile Include="src\auxiliary\DeviceCreationDetails.cpp" />
+    <ClCompile Include="src\core\Instance.cpp" />
+    <ClCompile Include="src\core\PhysicalDevice.cpp" />
+    <ClCompile Include="src\core\Queue.cpp" />
+    <ClCompile Include="src\auxiliary\QueueCreationDetails.cpp" />
+    <ClCompile Include="src\auxiliary\QueueFamilyProperties.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.vcxproj">
+      <Project>{d1514ff7-ad06-4bf1-bf3a-befd85e33c3e}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

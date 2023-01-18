@@ -3,18 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestBed", "TestBed\TestBed.vcxproj", "{82B80CFD-202B-41D8-910D-24198681789C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestBed", "Source\TestBed\TestBed.vcxproj", "{82B80CFD-202B-41D8-910D-24198681789C}"
 	ProjectSection(ProjectDependencies) = postProject
 		{20780779-6F55-4AC3-B6AF-D666FF13089F} = {20780779-6F55-4AC3-B6AF-D666FF13089F}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VulkanWrapper", "VulkanWrapper\VulkanWrapper.vcxproj", "{771BFA95-5931-45EB-901C-ECDBFE2E0645}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VulkanWrapper", "Source\VulkanWrapper\VulkanWrapper.vcxproj", "{771BFA95-5931-45EB-901C-ECDBFE2E0645}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Common", "Common\Common.vcxproj", "{D1514FF7-AD06-4BF1-BF3A-BEFD85E33C3E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Common", "Source\Common\Common.vcxproj", "{D1514FF7-AD06-4BF1-BF3A-BEFD85E33C3E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VulkanRenderer", "VulkanRenderer\VulkanRenderer.vcxproj", "{20780779-6F55-4AC3-B6AF-D666FF13089F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VulkanRenderer", "Source\VulkanRenderer\VulkanRenderer.vcxproj", "{20780779-6F55-4AC3-B6AF-D666FF13089F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GenericRenderer", "GenericRenderer\GenericRenderer.vcxproj", "{1055CCC5-225A-4490-B652-068BD1F4C86E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GenericRenderer", "Source\GenericRenderer\GenericRenderer.vcxproj", "{1055CCC5-225A-4490-B652-068BD1F4C86E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
