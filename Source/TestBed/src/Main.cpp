@@ -8,6 +8,7 @@ int main()
     auto renderingEnvironment = createRenderingEnvironment();
     auto physicalDevice = *renderingEnvironment->getAvailablePhysicalDevices();
     auto renderingWorld = renderingEnvironment->createRenderingWorld(physicalDevice);
+    auto renderingSurface = renderingWorld->createRenderingSurface(nullptr);
     renderingEnvironment->release();
     return 0;
 }

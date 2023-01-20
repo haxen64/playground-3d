@@ -82,6 +82,7 @@
   <ItemGroup>
     <ClCompile Include="src\core\VulkanPhysicalDevice.cpp" />
     <ClCompile Include="src\core\VulkanRenderingEnvironment.cpp" />
+    <ClCompile Include="src\core\VulkanRenderingSurface.cpp" />
     <ClCompile Include="src\core\VulkanRenderingWorld.cpp" />
     <ClCompile Include="src\Entry.cpp" />
   </ItemGroup>
@@ -99,6 +100,7 @@
   <ItemGroup>
     <ClInclude Include="src\core\VulkanPhysicalDevice.h" />
     <ClInclude Include="src\core\VulkanRenderingEnvironment.h" />
+    <ClInclude Include="src\core\VulkanRenderingSurface.h" />
     <ClInclude Include="src\core\VulkanRenderingWorld.h" />
     <ClInclude Include="src\Entry.h" />
   </ItemGroup>
